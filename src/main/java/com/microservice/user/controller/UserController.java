@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.microservice.user.entity.Users;
 import com.microservice.user.exception.UserApplicationException;
 import com.microservice.user.request.UserUpdateDto;
+import com.microservice.user.request.BlockCardRequestDto;
+import com.microservice.user.request.TransactionRequestDto;
 import com.microservice.user.response.UserPaginationResponse;
 import com.microservice.user.service.UserService;
 
@@ -88,6 +92,18 @@ public class UserController {
 	public ResponseEntity<String> logout(@Valid @RequestParam Long id) throws UserApplicationException {
 
 		String response = userService.softDeleteUser(id);
+		return ResponseEntity.status(HttpStatus.OK).body(response);
+	}
+	
+	@PatchMapping("/block-card")
+	public ResponseEntity<String> blockCard(@RequestBody BlockCardRequestDto blockCardRequestDto ) throws UserApplicationException{
+		String response = userService.blockCard(blockCardRequestDto.getUserId(),blockCardRequestDto.getCardNumber(),blockCardRequestDto.getIsBlocked());
+		return ResponseEntity.status(HttpStatus.OK).body(response);
+	}
+	
+	@PostMapping("/transaction")
+	public ResponseEntity<String> createTransaction(@RequestBody TransactionRequestDto transactionRequestDto ) throws UserApplicationException{
+		String response = userService.createTransaction(transactionRequestDto.getUserId(),transactionRequestDto.getAmount(),transactionRequestDto.getTransactionType());
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 

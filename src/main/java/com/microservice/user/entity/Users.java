@@ -23,6 +23,8 @@ public class Users implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Long id;
+	@Column
+	private String accountType;
 
 	@Column
 	private boolean isOtpVerified = false;
@@ -67,6 +69,22 @@ public class Users implements Serializable {
 
 	private Boolean deleted = false;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+	
 	public Boolean isDeleted() {
 		return deleted;
 	}

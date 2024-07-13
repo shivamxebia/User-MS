@@ -18,4 +18,8 @@ public interface UserService {
 	String deleteUser(Long userId) throws UserApplicationException;
 
 	String softDeleteUser(Long userId) throws UserApplicationException;
+
+	String blockCard(Long userId,Long cardNumber,boolean isBlocked) throws UserApplicationException;
+
+	String createTransaction(Long userId, Long amount, String transactionType) throws UserApplicationException;
 }

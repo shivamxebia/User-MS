@@ -25,6 +25,15 @@ public class UserRegistrationRequestDto {
 	private String password;
 	private String phoneNumber;
 
+	private String accountType;
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
 	public String getEmail() {
 		return email;
 	}
